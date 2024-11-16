@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace SOLID_Principles.Domain;
 
 /// <summary>
@@ -5,6 +7,7 @@ namespace SOLID_Principles.Domain;
 /// </summary>
 /// <param name="name">The name of the user.</param>
 /// <param name="email">The email belonging to the user.</param>
+[DebuggerDisplay("{Name}")]
 public class User(string name, string email)
 {
     /// <summary>
