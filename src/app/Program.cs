@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using SOLID_Principles.Infrastructure;
+using SOLID_Principles.Services.DTOs.Users;
 using SOLID_Principles.Services.Profiles.Mapping;
 using SOLID_Principles.Services.UserService;
 
@@ -45,6 +46,20 @@ app.MapGet("/api/User({id})", async (int id, IUserService svc, CancellationToken
 {
     var user = await svc.GetUser(id, ct);
     return user == null ? Results.NotFound() : Results.Ok(user);
+});
+
+app.MapPost("api/User", async (PostUserDTO model, IUserService svc, CancellationToken ct) =>
+{
+    if (model is null)
+    {
+        return Results.BadRequest();
+    }
+
+    var user = await svc.CreateUserAsync(model, ct);
+
+    return user is null 
+        ? Results.BadRequest() 
+        : Results.Created($"api/User({user.Id})", user);
 });
 
 app.Run();

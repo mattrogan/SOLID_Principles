@@ -9,3 +9,13 @@ GET {{SOLID_Principles_HostAddress}}/api/User(1002)
 Content-Type: application/json
 
 ###
+
+POST {{SOLID_Principles_HostAddress}}/api/User
+Content-Type: application/json
+
+{
+  "name": "Created User",
+  "email": "created_user@gmail.com"
+}
+
+###
