@@ -1,1 +1,11 @@
 @SOLID_Principles_HostAddress = http://localhost:5077
+
+GET {{SOLID_Principles_HostAddress}}/api/User
+Content-Type: application/json
+
+###
+
+GET {{SOLID_Principles_HostAddress}}/api/User(1002)
+Content-Type: application/json
+
+###

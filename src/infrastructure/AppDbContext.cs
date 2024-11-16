@@ -17,8 +17,6 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // This is merely a sandbox project -- never going to be used in a production environment,
-        // hence why the following are enabled & why the conn string is exposed..
         optionsBuilder.EnableSensitiveDataLogging();
         optionsBuilder.EnableDetailedErrors();
 
