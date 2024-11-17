@@ -1,3 +1,4 @@
+using System.Data.Common;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SOLID_Principles.Domain;
@@ -35,5 +36,39 @@ public class UserService : IUserService
         await _context.AddAsync(user, token);
         await _context.SaveChangesAsync();
         return user;
+    }
+
+    public async Task<User?> UpdateUserAsync(int id, PostUserDTO model, CancellationToken token = default)
+    {
+        var src = _mapper.Map<User>(model);
+
+        var dest = await _context.Set<User>().SingleOrDefaultAsync(u => u.Id.Equals(id), token);
+
+        // The user existing should be an invariant, but just in case...
+        ArgumentNullException.ThrowIfNull(dest);
+
+        _mapper.Map(src, dest);
+        await _context.SaveChangesAsync(token);
+
+        return dest;
+    }
+
+    public async Task<bool> DeleteUserAsync(int id, CancellationToken token = default)
+    {
+        var user = await _context.Set<User>().SingleOrDefaultAsync(u => u.Id.Equals(id), token);
+
+        ArgumentNullException.ThrowIfNull(user);
+
+        try
+        {
+            _context.Remove(user);
+            await _context.SaveChangesAsync(token);
+
+            return true;
+        }
+        catch (DbException)
+        {
+            return false;
+        }
     }
 }

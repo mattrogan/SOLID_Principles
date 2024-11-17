@@ -10,5 +10,8 @@ public class PostUserDTOMappingProfiles : Profile
     public PostUserDTOMappingProfiles()
     {
         CreateMap<PostUserDTO, User>();
+
+        CreateMap<User, User>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore());
     }
 }
