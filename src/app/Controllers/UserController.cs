@@ -29,7 +29,7 @@ public class UserController(IUserService service, ILogger<UserController> logger
         var users = await _service.GetUsers(token);
 
         _logger.LogInformation("Returning users");
-        
+
         return Ok(users);
     }
 
@@ -77,5 +77,48 @@ public class UserController(IUserService service, ILogger<UserController> logger
         }
 
         return Created(nameof(GetUserAsync), user);
+    }
+
+    [HttpPut("api/User({id:int})")]
+    public async Task<IActionResult> PutUserAsync(int id, PostUserDTO model, CancellationToken token = default)
+    {
+        if (model is null || ModelState.IsValid == false)
+        {
+            return ValidationProblem(ModelState);
+        }
+
+        var user = await _service.GetUser(id, token);
+        if (user is null)
+        {
+            return NotFound();
+        }
+
+        user = await _service.UpdateUserAsync(id, model, token);
+        if (user is null)
+        {
+            return StatusCode((int)HttpStatusCode.ServiceUnavailable);
+        }
+
+        return Ok(user);
+    }
+
+    [HttpDelete("api/User({id:int})")]
+    public async Task<IActionResult> DeleteAsync(int id, CancellationToken token)
+    {
+        _logger.LogInformation("Attempting to delete user with id {UserId}", id);
+
+        var user = await _service.GetUser(id, token);
+        if (user == null)
+        {
+            _logger.LogInformation("User with id {UserId} not found", id);
+            return NotFound();
+        }
+
+        if (!await _service.DeleteUserAsync(id, token))
+        {
+            return StatusCode((int)HttpStatusCode.ServiceUnavailable);
+        }
+
+        return NoContent();
     }
 }
