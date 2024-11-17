@@ -28,6 +28,8 @@ public class UserController(IUserService service, ILogger<UserController> logger
 
         var users = await _service.GetUsers(token);
 
+        _logger.LogInformation("Returning users");
+        
         return Ok(users);
     }
 
@@ -44,7 +46,15 @@ public class UserController(IUserService service, ILogger<UserController> logger
 
         var user = await _service.GetUser(id, token);
 
-        return user is null ? NotFound() : Ok(user);
+        if (user is null)
+        {
+            _logger.LogInformation("User with id {UserId} couldn't be found", id);
+            return NotFound();
+        }
+
+        _logger.LogInformation("Returning user...");
+        
+        return Ok(user);
     }
 
     [HttpPost("api/User")]
