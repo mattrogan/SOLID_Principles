@@ -12,7 +12,7 @@ using SOLID_Principles.Infrastructure;
 namespace SOLID_Principles.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241116160357_InitialCreate")]
+    [Migration("20241117224631_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
