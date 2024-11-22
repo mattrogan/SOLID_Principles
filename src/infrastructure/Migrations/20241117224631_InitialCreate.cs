@@ -51,8 +51,7 @@ namespace SOLID_Principles.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Expense_UserId",
                 table: "Expense",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
         }
 
         /// <inheritdoc />
