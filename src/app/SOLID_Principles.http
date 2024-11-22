@@ -19,3 +19,19 @@ Content-Type: application/json
 }
 
 ###
+
+GET {{SOLID_Principles_HostAddress}}/api/Expense
+Content-Type: application/json
+
+###
+
+POST {{SOLID_Principles_HostAddress}}/api/Expense
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "amount": 500,
+  "category": 2,
+  "date": "2024-11-22",
+  "description": "An expense of another category type"
+}

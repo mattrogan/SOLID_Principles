@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SOLID_Principles.Infrastructure;
+using SOLID_Principles.Services.ExpenseService;
 using SOLID_Principles.Services.Profiles.Mapping;
 using SOLID_Principles.Services.UserService;
 
@@ -25,15 +26,9 @@ builder.Services.AddAutoMapper(typeof(PostUserDTOMappingProfiles).Assembly);
 
 //Dependency Injections
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseHttpsRedirection();
 

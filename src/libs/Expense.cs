@@ -6,8 +6,12 @@
 /// <param name="category">The category of the expense.</param>
 /// <param name="amount">The amount of the expense.</param>
 /// <param name="description">A description of the expense's costs.</param>
-public class Expense(Category category, decimal amount, string description)
+public class Expense
 {
+    public Expense()
+    {
+    }
+
     /// <summary>
     /// Gets or sets the ID for the expense.
     /// </summary>
@@ -21,12 +25,12 @@ public class Expense(Category category, decimal amount, string description)
     /// <summary>
     /// Gets or sets the amount for the expense.
     /// </summary>
-    public decimal Amount { get; set; } = amount;
+    public decimal Amount { get; set; }
 
     /// <summary>
     /// Gets or sets the category of the expense.
     /// </summary>
-    public Category Category { get; set; } = category;
+    public Category Category { get; set; }
 
     /// <summary>
     /// Gets or sets the date of the expense.
@@ -36,7 +40,7 @@ public class Expense(Category category, decimal amount, string description)
     /// <summary>
     /// Gets or sets a description of the expense.
     /// </summary>
-    public string Description { get; set; } = description;
+    public string Description { get; set; }
 }
 
 /// <summary>

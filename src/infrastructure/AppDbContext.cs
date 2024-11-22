@@ -23,8 +23,8 @@ public class AppDbContext : DbContext
 
         var expense = modelBuilder.Entity<Expense>();
         expense.HasOne<User>()
-            .WithOne()
-            .HasPrincipalKey<User>(x => x.Id)
-            .HasForeignKey<Expense>(x => x.UserId);
+            .WithMany()
+            .HasPrincipalKey(x => x.Id)
+            .HasForeignKey(x => x.UserId);
     }
 }
