@@ -50,7 +50,7 @@ namespace SOLID_Principles.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Expense");
+                    b.ToTable("Expense", (string)null);
                 });
 
             modelBuilder.Entity("SOLID_Principles.Domain.User", b =>
@@ -71,14 +71,14 @@ namespace SOLID_Principles.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("SOLID_Principles.Domain.Expense", b =>
                 {
                     b.HasOne("SOLID_Principles.Domain.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithOne()
+                        .HasForeignKey("SOLID_Principles.Domain.Expense", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
